@@ -21,9 +21,10 @@ class Game_Controller_Action extends Zend_Controller_Action {
             $this->_forward("login", "user");
         }
         
+        //default navigation
+        $this->view->navigation = Zend_Registry::get('navigation-game');
     }
     
     public function init() {
-
     }
 }

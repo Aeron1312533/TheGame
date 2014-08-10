@@ -3,17 +3,31 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
 $this->headTitle()->setSeparator(' - ');
 $this->headTitle('Zend Framework web');
 echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
 <head>
     <?php echo $this->headMeta(); ?>
     <?php echo $this->headTitle(); ?>
-    <?php echo $this->headLink()
-        ->prependStylesheet($this->baseUrl . '/css/general.css'); ?>
+    <?php echo $this->headStyle(); ?>
+    <?php echo $this->headLink()->prependStylesheet($this->baseUrl . '/css/general.css'); ?>
 </head>
 <body>
-<div id="content">
-    <h1><?php echo $this->escape($this->title); ?></h1>
-    <?php echo $this->layout()->content; ?>
-</div>
+    <div id="page">
+        <div id="header">
+            <?php echo $this->partial('_header.phtml') ?>
+        </div>
+        <div id="main">
+            <div id="navigation">
+                <?php echo $this->navigation($this->navigation)
+                                ->setAcl(Zend_Registry::get('acl'))
+                                ->setRole(Zend_Registry::get('role')); ?>
+            </div>
+            <div id="content">
+                <?php echo $this->layout()->content; ?>
+            </div>
+        </div>
+        <div id="footer">
+            <?php echo $this->partial('_footer.phtml') ?>
+        </div>
+    </div>
 </body>
 </html>

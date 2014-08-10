@@ -9,7 +9,7 @@ class OverviewController extends Game_Controller_Action
     }
 
     public function indexAction() {
-       $this->view->message= "prihlaseny";
+      // $this->view->message= "prihlaseny";
        
     }
 

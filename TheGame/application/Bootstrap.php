@@ -27,13 +27,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                      Zend_Auth::getInstance()->getStorage()
                                               ->read()
                                               ->role);
-        }else{
+        } else{
             Zend_Registry::set('role', 'guest');
         }
 
         $acl = new Application_Model_Acl();
         Zend_Registry::set('acl', $acl);
 
+    }
+    
+    protected function _initNavigation() {
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/navigation/navigation.ini'); 
+        $navigation = new Zend_Navigation($config); 
+        
+        Zend_Registry::set('navigation-game', $navigation);
     }
 
 }
