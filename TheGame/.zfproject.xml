@@ -17,6 +17,9 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
         </controllerFile>
+        <controllerFile controllerName="Overview">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Herb"/>
@@ -70,7 +73,9 @@
         <moduleDirectory moduleName="login">
           <configsDirectory enabled="false"/>
           <controllersDirectory/>
-          <formsDirectory enabled="false"/>
+          <formsDirectory enabled="false">
+            <formFile formName="Login"/>
+          </formsDirectory>
           <layoutsDirectory enabled="false">
             <layoutScriptsDirectory enabled="false"/>
           </layoutsDirectory>
@@ -85,6 +90,23 @@
           </viewsDirectory>
         </moduleDirectory>
         <moduleDirectory moduleName="Login">
+          <configsDirectory enabled="false"/>
+          <controllersDirectory/>
+          <formsDirectory enabled="false"/>
+          <layoutsDirectory enabled="false">
+            <layoutScriptsDirectory enabled="false"/>
+          </layoutsDirectory>
+          <modelsDirectory>
+            <dbTableDirectory enabled="false"/>
+          </modelsDirectory>
+          <servicesDirectory enabled="false"/>
+          <viewsDirectory>
+            <viewScriptsDirectory/>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="overview">
           <configsDirectory enabled="false"/>
           <controllersDirectory/>
           <formsDirectory enabled="false"/>
@@ -122,6 +144,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Herb">
             <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Overview">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

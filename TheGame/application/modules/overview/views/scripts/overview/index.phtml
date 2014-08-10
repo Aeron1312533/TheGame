@@ -1,0 +1,7 @@
+<?php
+echo $this->message . "<br />";
+$user = Zend_Auth::getInstance()->getIdentity();
+echo $user->nickname . "<br />";
+?>
+<a href="<?php echo $this->url(array('module' => 'login', 'controller'=>'login',
+            'action'=>'logout'));?>">Logout</a>
