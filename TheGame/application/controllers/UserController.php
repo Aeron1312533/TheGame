@@ -1,14 +1,18 @@
 <?php
 
-class login_LoginController extends Game_Controller_Action
+class UserController extends Game_Controller_Action
 {
 
     public function init() {
         /* Initialize action controller here */
     }
-
+    
     public function indexAction() {
-       $form = new Login_Form_Login();
+        $this->_helper->redirector('login');
+    }
+    
+    public function loginAction() {
+       $form = new Application_Form_User_Login();
        $this->view->form = $form;
        
        if ($this->getRequest()->isPost()) {
@@ -21,7 +25,7 @@ class login_LoginController extends Game_Controller_Action
             if ($form->isValid($formData)) {
                 if($this->_processAuth($formData)) {
                     //$salt = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 16);
-                    $this->_helper->redirector('index', 'overview','overview');
+                    $this->_helper->redirector('index', 'overview');
                 } else {
                     Zend_Auth::getInstance()->clearIdentity();
                     $form->getElement('password')->addError('Incorrect login or password, try again !');
@@ -34,16 +38,16 @@ class login_LoginController extends Game_Controller_Action
     }
     
     public function registerAction() {
-        $this->_helper->redirector('index');
+        $this->_helper->redirector('login');
     }
     
     public function forgotPasswordAction() {
-        $this->_helper->redirector('index');
+        $this->_helper->redirector('login');
     }
 
     public function logoutAction() {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->_helper->redirector('index');
+        $this->_helper->redirector('login');
     }
     
     protected function _getAuthAdapter() {

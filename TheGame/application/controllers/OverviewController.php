@@ -1,6 +1,6 @@
 <?php
 
-class overview_OverviewController extends Game_Controller_Action
+class OverviewController extends Game_Controller_Action
 {
 
     public function init() {

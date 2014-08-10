@@ -9,7 +9,7 @@ class Game_Controller_Action extends Zend_Controller_Action {
     
     public function init() {
         if (!Zend_Auth::getInstance()->hasIdentity()) {
-            $this->_helper->redirector('index', 'login','login');
+            $this->_helper->redirector('login', 'user');
         }
     }
 }

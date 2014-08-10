@@ -1,9 +1,9 @@
 <?php
 
-class Login_Form_Login extends Game_Form {
+class Application_Form_User_Login extends Game_Form {
 
     public function init() {
-        $configFilePath = APPLICATION_PATH . "/modules/login/forms/login.ini";
+        $configFilePath = APPLICATION_PATH . "/forms/user/login.ini";
         $config = new Zend_Config_Ini($configFilePath);
         
         $this->setConfig($config);
