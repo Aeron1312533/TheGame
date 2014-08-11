@@ -1,0 +1,25 @@
+div#wrapper {
+    max-width: 1200px;
+    margin: 0;
+}
+
+div#footer {
+    height:50px;
+}
+div#header div#header_mid{
+    height:150px;
+}
+
+div#main div#main_mid_bottom {
+    min-height: 700px;
+}
+
+div#wrapper div {
+    border-width: 1px;
+    border-color: #000;
+    border-style: solid;
+}
+
+div#wrapper div#wrapper_margin_left {
+    border-width: 0px;
+}

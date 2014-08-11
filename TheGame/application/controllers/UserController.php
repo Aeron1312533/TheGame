@@ -16,7 +16,12 @@ class UserController extends Game_Controller_Action
     public function loginAction() {
        $form = new Application_Form_User_Login();
        $this->view->form = $form;         
-       $this->view->navigation = NULL;
+       $this->view->navigation_main = NULL;
+       $this->view->navigation_user = NULL;
+       
+       $layout = $this->_helper->layout();
+        $layout->setLayout('layout_login');
+        
        
        if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();

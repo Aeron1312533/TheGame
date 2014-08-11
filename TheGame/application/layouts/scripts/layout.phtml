@@ -8,26 +8,42 @@ echo $this->doctype(); ?>
     <?php echo $this->headMeta(); ?>
     <?php echo $this->headTitle(); ?>
     <?php echo $this->headStyle(); ?>
-    <?php echo $this->headLink()->prependStylesheet($this->baseUrl . '/css/general.css'); ?>
+    <?php echo $this->headLink()->prependStylesheet($this->baseUrl . '/css/bootstrap.min.css'); ?>
+    <?php echo $this->headLink()->prependStylesheet($this->baseUrl . '/css/customized.css'); ?>
 </head>
 <body>
-    <div id="page">
-        <div id="header">
-            <?php echo $this->partial('_header.phtml') ?>
+<div id="wrapper" class="container">
+    <div id="wrapper_margin_left" class = "col-md-1">
+        
+    </div>
+    <div id="page" class="col-md-11">
+        <div id="header" class="row">
+            <?php echo $this->render('_header.phtml') ?>
         </div>
-        <div id="main">
-            <div id="navigation">
-                <?php echo $this->navigation($this->navigation)
+        <div id="main" class="row">
+            <div id="main_left" class="col-md-2">
+                <div id="main_left_navigation">
+                    <?php echo $this->navigation($this->navigation_main)
                                 ->setAcl(Zend_Registry::get('acl'))
                                 ->setRole(Zend_Registry::get('role')); ?>
+                </div>
             </div>
-            <div id="content">
-                <?php echo $this->layout()->content; ?>
+            <div id="main_mid" class="col-md-8">
+                <div id="main_mid_top" class="row">
+                    <?php echo $this->render('_main_mid_top.phtml') ?>
+                </div>
+                <div id="main_mid_bottom" class="row">
+                    <?php echo $this->layout()->content; ?>
+                </div>
+            </div>
+            <div id="main_right" class="col-md-2">
+               adverts 
             </div>
         </div>
-        <div id="footer">
-            <?php echo $this->partial('_footer.phtml') ?>
+        <div id="footer" class="row">
+            <?php echo $this->render('_footer.phtml') ?>
         </div>
     </div>
+</div>
 </body>
 </html>

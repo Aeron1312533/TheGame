@@ -1,0 +1,10 @@
+<div id="header_left" class="col-md-2">game status,time to next battle</div>
+<div id="header_mid" class="col-md-5">Logo</div>
+<div id="header_right" class="col-md-5">
+    <div id="header_right_navigation">
+         <?php echo $this->navigation($this->navigation_user)
+                         ->setAcl(Zend_Registry::get('acl'))
+                         ->setRole(Zend_Registry::get('role'));
+         ?>
+    </div>
+</div>

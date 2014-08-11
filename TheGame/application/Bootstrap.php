@@ -36,11 +36,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     }
     
-    protected function _initNavigation() {
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/navigation/navigation.ini'); 
-        $navigation = new Zend_Navigation($config); 
+    protected function _initNavigations() {
+        $nav_conf_files = glob(APPLICATION_PATH . '/configs/navigation/' . '*.ini');
         
-        Zend_Registry::set('navigation-game', $navigation);
+        foreach($nav_conf_files as $item) {       
+            $config = new Zend_Config_Ini($item); 
+            $navigation = new Zend_Navigation($config); 
+            
+            Zend_Registry::set(basename($item, ".ini"), $navigation);
+        }
     }
 
 }
