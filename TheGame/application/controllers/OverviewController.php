@@ -14,4 +14,3 @@ class OverviewController extends Game_Controller_Action
     }
 
 }
-

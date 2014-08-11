@@ -6,6 +6,11 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
+        $logPath = NULL;
+        
+        $date = new Zend_Date();
+        $time = $date->get('YYYY-MM-dd-HH-mm-ss');
+                
         
         if (!$errors || !$errors instanceof ArrayObject) {
             $this->view->message = 'You have reached the error page';
@@ -20,6 +25,7 @@ class ErrorController extends Zend_Controller_Action
                 $this->getResponse()->setHttpResponseCode(404);
                 $priority = Zend_Log::NOTICE;
                 $this->view->message = 'Page not found';
+                $logPath = APPLICATION_PATH . '/../data/logs/_other/log.txt';
                 break;
             default:
                 // application error
@@ -31,6 +37,28 @@ class ErrorController extends Zend_Controller_Action
         
         // Log exception, if logger available
         if ($log = $this->getLog()) {
+            $log->log($this->view->message, $priority, $errors->exception);
+            $log->log('Request Parameters', $priority, $errors->request->getParams());
+        } else {
+            if(is_null($logPath)) {
+                $controller = $errors->request->getControllerName();
+                $module = $errors->request->getModuleName();
+                $action = $errors->request->getActionName();
+                
+                $logPath = APPLICATION_PATH . '/../data/logs/' . $module . '/' . $controller . '/' . $action . '/' . $time . '.txt';
+            }
+
+            $writer = new Zend_Log_Writer_Stream($logPath);
+            $formatter = new Zend_Log_Formatter_Xml();
+            $writer->setFormatter($formatter);
+            
+            $filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
+
+
+            $log = new Game_Log($writer);
+            $log->addWriterUnique($writer);
+            $log->addFilter($filter);
+            
             $log->log($this->view->message, $priority, $errors->exception);
             $log->log('Request Parameters', $priority, $errors->request->getParams());
         }
