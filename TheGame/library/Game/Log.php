@@ -2,7 +2,7 @@
 
 class Game_Log extends Zend_Log {
     
-    public function _construct() {
+    public function __construct() {
         parent::__construct();
     }
     
