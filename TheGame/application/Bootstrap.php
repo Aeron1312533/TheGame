@@ -46,6 +46,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             Zend_Registry::set(basename($item, ".ini"), $navigation);
         }
     }
+    
+    protected function _initTranslation() {
+        // Define the path where the language files are
+        $langPath = APPLICATION_PATH . "/languages/";
+        
+        // Set default location according to ip address
+        $language = 'auto';
+        
+        //check if user has not set own preferred language
+        if (Zend_Auth::getInstance()->hasIdentity()){
+            $language = Zend_Auth::getInstance()->getIdentity()->language;
+        }
+        
+        $locale = new Zend_Locale($language);
+        
+        $locale->getLanguage();
+        // Create an instance of Zend's ini adapter
+        $translate = new Zend_Translate('ini', $langPath . $locale->getLanguage() . '.ini', $locale->getLanguage());
+        $translate->setLocale($locale);
+ 
+        // Set this Translation as global translation for the view helper
+        Zend_Registry::set('Zend_Locale', $locale);
+        Zend_Registry::set('Zend_Translate', $translate);
+    }
 
 }
 

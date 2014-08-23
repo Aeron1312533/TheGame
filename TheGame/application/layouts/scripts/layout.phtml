@@ -25,7 +25,8 @@ echo $this->doctype(); ?>
                 <div id="main_left_navigation">
                     <?php echo $this->navigation($this->navigation_main)
                                 ->setAcl(Zend_Registry::get('acl'))
-                                ->setRole(Zend_Registry::get('role')); ?>
+                                ->setRole(Zend_Registry::get('role'))
+                                ->setTranslator(Zend_Registry::get('Zend_Translate')); ?>
                 </div>
             </div>
             <div id="main_mid" class="col-md-8">

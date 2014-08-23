@@ -11,6 +11,7 @@ class ErrorController extends Zend_Controller_Action {
         $this->errors = $this->_getParam('error_handler');
         $this->logRootDir = APPLICATION_PATH . '/../data/logs/';
     }
+    
     public function errorAction() {      
         $saveError = true;
         
