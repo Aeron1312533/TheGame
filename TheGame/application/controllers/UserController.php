@@ -16,11 +16,9 @@ class UserController extends Game_Controller_Action
     public function loginAction() {
        $form = new Application_Form_User_Login();
        $this->view->form = $form;         
-       $this->view->navigation_main = NULL;
-       $this->view->navigation_user = NULL;
        
        $layout = $this->_helper->layout();
-        $layout->setLayout('layout_login');
+       $layout->setLayout('layout_login');
         
        
        if ($this->getRequest()->isPost()) {
@@ -32,7 +30,6 @@ class UserController extends Game_Controller_Action
             
             if ($form->isValid($formData)) {
                 if($this->_processAuth($formData)) {
-                    //$salt = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 16);
                     $this->_helper->redirector('index', 'overview');
                 } else {
                     Zend_Auth::getInstance()->clearIdentity();
@@ -45,8 +42,22 @@ class UserController extends Game_Controller_Action
        
     }
     
-    public function registerAction() {
-        $this->_helper->redirector('login');
+    public function registerAction() {    
+       $layout = $this->_helper->layout();
+       $layout->setLayout('layout_login');
+       
+   /*    $new_user = new Application_Model_User();
+       $new_user->setEmail('bla@bla');
+       $new_user->setNickname('Aeronko');
+       $new_user->setLanguage('cs');
+       $new_user->setRole('basic_user');
+       
+       $pass = new Game_Password('parada');
+       $new_user->setPassword($pass->encrypt());
+       $new_user->setPasswordSalt($pass->getSalt());
+       
+       $this->view->bla = $new_user->insert();*/
+       
     }
     
     public function forgotPasswordAction() {

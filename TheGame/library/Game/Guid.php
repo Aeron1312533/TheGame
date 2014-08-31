@@ -1,13 +1,17 @@
 <?php
 
 class Game_Guid {
-    public $guid;
+    protected $guid;
     
      function __construct() {
         $this->generate();
     }
     
     public function __toString() {
+        return $this->guid;
+    }
+    
+    public function getGuid() {
         return $this->guid;
     }
     
