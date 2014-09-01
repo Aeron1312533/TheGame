@@ -5,38 +5,67 @@
  * @author peter.pekarovic
  */
 abstract class Game_Model_Abstract implements Game_Model_Interface {
-    protected $storage = NULL;
+    protected $dataMapper = NULL;
     protected $modelName = NULL;
+    protected $validator = NULL;
+    protected $filter = NULL;
     protected $data = Array();
     
-    abstract public function insert();
-    abstract public function update();
-    abstract public function delete();
-    abstract public function find($id);
-    abstract public function fetchAll();
-    
-    public function getStorage() {
-        if(!isset($this->storage)) {
-            throw new Game_Model_Exception('Model: ' . $this->modelName . ' - storage not set');
+    public function getDataMapper() {
+        if(!isset($this->dataMapper)) {
+            throw new Game_Model_Exception('Model: ' . $this->modelName . ' - data mapper not set');
         }
         
-        return $this->storage;      
+        return $this->dataMapper;      
     }
     
-    public function setStorage($storage) {
-        $this->storage = $storage;
+    public function setDataMapper($dataMapper) {
+        $this->dataMapper = $dataMapper;
+    }
+    
+    public function getValidator() {
+        if(!isset($this->validator)) {
+            throw new Game_Model_Exception('Model: ' . $this->modelName . ' - validator not set');
+        }
+        
+        return $this->validator;      
+    }
+    
+    public function setValidator($validator) {
+        $this->validator = $validator;
+    }
+    
+    public function getFilter() {
+        if(!isset($this->filter)) {
+            throw new Game_Model_Exception('Model: ' . $this->modelName . ' - filter not set');
+        }
+        
+        return $this->filter;      
+    }
+    
+    public function setFilter($filter) {
+        $this->filter = $filter;
     }
     
     public function getData() {
-        if(!isset($this->data)) {
+        if (!isset($this->data)) {
             throw new Game_Model_Exception('Model: ' . $this->modelName . ' - data not set');
         }
         
         return $this->data;
     }
     
-    public function setData($data) {
-        $this->data = (Array) $data;
+    public function setData(array $data) {
+       $methods = get_class_methods($this);
+       
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            
+            if (in_array($method, $methods)) {
+                $this->$method($value);
+            }
+        }
+        return $this;
     }
     
     public function __get($attritbute) {
@@ -57,5 +86,9 @@ abstract class Game_Model_Abstract implements Game_Model_Interface {
         }
         
         $this->$method($value);
+    }
+    
+    public function isValid() {
+        return $this->getValidator()->isValid();
     }
 }

@@ -4,7 +4,7 @@
  *
  * @author peter.pekarovic
  */
-class Application_Model_User extends Game_Model_Database {
+class Application_Model_User extends Game_Model_Abstract {
     
     const COL_ID_USER = 'id_user';
     const COL_NICKNAME = 'nickname';
@@ -16,8 +16,20 @@ class Application_Model_User extends Game_Model_Database {
     const COL_LANGUAGE = 'language';
     
     public function __construct() {
-        $this->storage = new Application_Model_DbTable_User();
+        $this->dataMapper = new Application_Model_dataMapper_dbTable_User($this);
         $this->modelName = 'User';
+    }
+    
+    public function getId() {
+        if(!isset($this->data['id'])) {
+            throw new Game_Model_Exception('Model: ' . $this->modelName . ' - id not set');
+        }
+        
+        return $this->data['id'];
+    }
+    
+    public function setId($id) {
+        $this->data['id'] = $id;
     }
     
     public function getNickname() {

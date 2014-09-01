@@ -38,7 +38,7 @@ class UserController extends Game_Controller_Action
             } else {
                 $form->populate($formData);
             }
-        }
+        }   
        
     }
     
@@ -46,17 +46,10 @@ class UserController extends Game_Controller_Action
        $layout = $this->_helper->layout();
        $layout->setLayout('layout_login');
        
-   /*    $new_user = new Application_Model_User();
-       $new_user->setEmail('bla@bla');
-       $new_user->setNickname('Aeronko');
-       $new_user->setLanguage('cs');
-       $new_user->setRole('basic_user');
+      $new_user = new Application_Model_User();
+      $new_user->getDataMapper()->fetchAll();
        
-       $pass = new Game_Password('parada');
-       $new_user->setPassword($pass->encrypt());
-       $new_user->setPasswordSalt($pass->getSalt());
-       
-       $this->view->bla = $new_user->insert();*/
+       $this->view->bla = $new_user->getDataMapper()->fetchAll();
        
     }
     
