@@ -46,10 +46,36 @@ class UserController extends Game_Controller_Action
        $layout = $this->_helper->layout();
        $layout->setLayout('layout_login');
        
-      $new_user = new Application_Model_User();
-      $new_user->getDataMapper()->fetchAll();
+       $form = new Application_Form_User_Register();
+       $this->view->assign('form', $form);
        
-       $this->view->bla = $new_user->getDataMapper()->fetchAll();
+       if ($this->getRequest()->isPost()) {
+           $formData = $this->getRequest()->getPost();
+           
+           if (isset($formData["back"])) {
+                $this->_helper->redirector('login');
+           }
+           
+           if ($form->isValid($formData)) {
+               $newUser = new Application_Model_User();
+               $newUser->setData($formData);
+               
+               $password = new Game_Password($formData["password"]);
+               
+               $newUser->setPassword($password->encrypt());
+               $newUser->setPasswordSalt($password->getSalt());
+               
+               $newUser->getDataMapper()->insert();
+               
+            } else {
+                $form->populate($formData);
+            }
+       }
+       
+     /* $new_user = new Application_Model_User();
+      $new_user->getDataMapper()->fetchAll();*/
+       
+     /*  $this->view->bla = $new_user->getDataMapper()->fetchAll();*/
        
     }
     
