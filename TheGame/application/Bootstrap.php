@@ -51,8 +51,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // Define the path where the language files are
         $langPath = APPLICATION_PATH . "/languages/";
         
-        // Set default location according to ip address
-        $language = 'auto';
+        // Set default location to english
+        $language = 'en';
         
         //check if user has not set own preferred language
         if (Zend_Auth::getInstance()->hasIdentity()){

@@ -7,6 +7,7 @@
  */
 class Game_Password {
     protected $password;
+    protected $passwordEncrypted;
     protected $salt;
     
      function __construct($password, $salt = NULL) {
@@ -14,13 +15,14 @@ class Game_Password {
            $guid = new Game_Guid();
            $salt = $guid->getGuid();
         }
-        
+
         $this->setSalt($salt);
         $this->setPassword($password);
+        $this->encrypt();
     }
     
     public function encrypt() {
-        return sha1($this->getPassword() . $this->getSalt());
+        $this->passwordEncrypted =  sha1($this->getPassword() . $this->getSalt());
     }
     
     public function setSalt($salt) {
@@ -45,5 +47,17 @@ class Game_Password {
         }
         
         return $this->password;
+    }
+    
+    public function setPasswordEncrypted($passwordEncrypted) {
+        $this->passwordEncrypted = $passwordEncrypted;
+    }
+    
+    public function getPasswordEncrypted() {
+        if(!isset($this->passwordEncrypted)) {
+            throw new Game_Exception('Encrypted Password not set');
+        }
+        
+        return $this->passwordEncrypted;
     }
 }

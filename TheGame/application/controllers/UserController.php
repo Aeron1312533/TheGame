@@ -62,7 +62,7 @@ class UserController extends Game_Controller_Action
                
                $password = new Game_Password($formData["password"]);
                
-               $newUser->setPassword($password->encrypt());
+               $newUser->setPassword($password->getPasswordEncrypted());
                $newUser->setPasswordSalt($password->getSalt());
                
                $newUser->getDataMapper()->insert();

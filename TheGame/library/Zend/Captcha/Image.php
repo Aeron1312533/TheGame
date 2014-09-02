@@ -483,7 +483,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
             $w = imagesx($img);
             $h = imagesy($img);
         }
-        $text_color = imagecolorallocate($img, 0, 0, 0);
+        $text_color = imagecolorallocate($img, 42,178 ,90 );
         $bg_color   = imagecolorallocate($img, 255, 255, 255);
         imagefilledrectangle($img, 0, 0, $w-1, $h-1, $bg_color);
         $textbox = imageftbbox($fsize, 0, $font, $word);
