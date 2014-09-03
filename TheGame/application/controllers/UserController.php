@@ -6,7 +6,6 @@ class UserController extends Game_Controller_Action
     public function init() {
         /* Initialize action controller here */  
                 //add view
-        
     }
     
     public function indexAction() {
@@ -15,15 +14,15 @@ class UserController extends Game_Controller_Action
     
     public function loginAction() {
        $form = new Application_Form_User_Login();
-       $this->view->form = $form;         
+       $this->view->form = $form;  
        
        $layout = $this->_helper->layout();
        $layout->setLayout('layout_login');
         
-       
+       $this->_helper->setLanguages();
+              
        if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
-            
+            $formData = $this->getRequest()->getPost();            
             if (isset($formData["register"])) {
                 $this->_helper->redirector('register');
             }
@@ -48,6 +47,8 @@ class UserController extends Game_Controller_Action
        
        $form = new Application_Form_User_Register();
        $this->view->assign('form', $form);
+       
+       $this->_helper->setLanguages();
        
        if ($this->getRequest()->isPost()) {
            $formData = $this->getRequest()->getPost();

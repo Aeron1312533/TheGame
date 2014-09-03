@@ -12,7 +12,10 @@ echo $this->doctype(); ?>
     <?php echo $this->headLink()->prependStylesheet($this->baseUrl . '/css/customized_login.css'); ?>
 </head>
 <body>
-<div id="wrapper" class="container">   
+<div id="wrapper" class="container">
+    <div id="header" class="row">
+            <?php echo $this->formLanguages ?>
+    </div>
                     <?php echo $this->layout()->content; ?>
 </div>
 </body>

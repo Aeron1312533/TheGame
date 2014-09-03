@@ -27,7 +27,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                      Zend_Auth::getInstance()->getStorage()
                                               ->read()
                                               ->role);
-        } else{
+        } else {
             Zend_Registry::set('role', 'guest');
         }
 
@@ -47,16 +47,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
     }
     
+    protected function _initActionHelpers() {
+        Zend_Controller_Action_HelperBroker::addPrefix('Game_Controller_Action_Helper');
+    }
+    
     protected function _initTranslation() {
         // Define the path where the language files are
         $langPath = APPLICATION_PATH . "/languages/";
         
-        // Set default location to english
-        $language = 'en';
-        
         //check if user has not set own preferred language
         if (Zend_Auth::getInstance()->hasIdentity()){
             $language = Zend_Auth::getInstance()->getIdentity()->language;
+        } else if (Zend_Session::namespaceIsset('localization')) {
+            $ns = new Zend_Session_Namespace('localization');
+            $language = $ns->language;
+        } else {
+            $language = 'en';
         }
         
         $locale = new Zend_Locale($language);
