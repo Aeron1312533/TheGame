@@ -91,4 +91,19 @@ abstract class Game_Model_Abstract implements Game_Model_Interface {
     public function isValid() {
         return $this->getValidator()->isValid();
     }
+    
+    public function insert() {
+        ;
+    }
+    
+    public function update() {
+        ;
+    }
+    public function delete(){
+        ;
+    }
+    public function fetchByID($id) {
+        ;
+    }
+            
 }

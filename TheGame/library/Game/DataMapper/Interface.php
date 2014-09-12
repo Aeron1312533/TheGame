@@ -14,6 +14,7 @@ interface Game_DataMapper_Interface {
     public function insert();
     public function update();
     public function delete();
-    public function find($id);
-    public function fetchAll();            
+    public function findByID($id);
+    public function fetchAll();
+    public function findByCondition($condition);
 }

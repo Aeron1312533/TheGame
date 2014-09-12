@@ -11,8 +11,9 @@ abstract class Game_DataMapper_Abstract implements Game_DataMapper_Interface {
     abstract function insert();
     abstract function update();
     abstract function delete();
-    abstract function find($id);
+    abstract function findByID($id); //prerobit
     abstract function fetchAll(); 
+    abstract function findByCondition($condition);
     
     public function init($model, $storage) {
         $this->setStorage($storage);

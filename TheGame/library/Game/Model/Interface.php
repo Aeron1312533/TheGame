@@ -25,5 +25,9 @@ interface Game_Model_Interface {
     public function setData(array $data);
     
     public function isValid(); //validates model
+    public function insert();
+    public function update();
+    public function delete();
+    public function fetchByID($id);
             
 }

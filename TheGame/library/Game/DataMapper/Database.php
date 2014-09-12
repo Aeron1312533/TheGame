@@ -18,6 +18,7 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
             $columns = $this->getStorage()->info(Zend_Db_Table_Abstract::COLS);
             $data = $this->getModel()->getData();
             
+            //todo vymysliet config, ktory mapuje vlastnosti modelu na vlastnosti uloziska
             foreach ($data as $column => $value) {
                 if (!in_array($column, $columns)) {
                     unset($data[$column]);
@@ -37,8 +38,12 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
         return $id_row;
     }
     
+    public function findByCondition($condition) {
+        ;
+    }
     public function update() {
         try {
+            //z configu
             $columns = $this->getStorage()->info(Zend_Db_Table_Abstract::COLS);
             $data = $this->getModel()->getData();
             $id_row = (Array) $this->getModel()->getId();
@@ -88,7 +93,7 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
         return $this->getStorage()->fetchAll()->toArray();
     }
     
-    public function find($id) {
+    public function findByID($id) {
         $id_row = (Array) $id;
         $storage = $this->getStorage();
         $rowset = call_user_func_array(Array($storage, 'find'), $id_row);

@@ -16,6 +16,7 @@ class Application_Form_User_Register extends Game_Form {
     public function init() {
         $configFilePath = APPLICATION_PATH . "/forms/user/configs/register.ini";
         $config = new Zend_Config_Ini($configFilePath);
+       // $config = new Zend_Config_Xml($configFilePath);
         
         $this->setConfig($config);
        
