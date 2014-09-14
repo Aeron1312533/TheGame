@@ -11,10 +11,10 @@
  * @author peter.pekarovic
  */
 interface Game_DataMapper_Interface {   
-    public function insert();
-    public function update();
-    public function delete();
-    public function findByID($id);
+    public function insert($entity);
+    public function update($entity);
+    public function delete($idOrEntity);
+    public function findById($id);
     public function fetchAll();
     public function findByCondition($condition);
 }

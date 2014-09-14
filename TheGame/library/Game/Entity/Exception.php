@@ -11,6 +11,6 @@
  *
  * @author peter.pekarovic
  */
-class Game_Model_Exception extends Zend_Exception {
+class Game_Entity_Exception extends Zend_Exception {
     //put your code here
 }

@@ -11,7 +11,7 @@ class OverviewController extends Game_Controller_Action
     public function indexAction() {
       // $this->view->message= "prihlaseny";
         
-      $model = new Application_Model_User();
+      $model = new Application_Model_Entity_User();
       $this->view->bla = $model->getData();
        
     }

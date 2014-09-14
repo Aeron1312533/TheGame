@@ -25,18 +25,11 @@ class Game_Controller_Action_Helper_SetLanguages extends Zend_Controller_Action_
     }
     
     public function processForm($post) {
-        if (isset($post["slovakia"])) {
+        if (isset($post["language"])) {
                 $ns = new Zend_Session_Namespace('localization');
-                $ns->language = "cs";
+                $ns->language = $this->getRequest()->getPost("language");
                 $this->getActionController()->getHelper('redirector')
                                             ->direct($this->getRequest()->getActionName());
             }
-            
-        if (isset($post["unitedKingdom"])) {
-            $ns = new Zend_Session_Namespace('localization');
-            $ns->language = "en";
-            $this->getActionController()->getHelper('redirector')
-                                            ->direct($this->getRequest()->getActionName());
-        }
     }
 }

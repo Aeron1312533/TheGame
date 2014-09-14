@@ -41,43 +41,28 @@ class UserController extends Game_Controller_Action
        
     }
     
-    public function registerAction() {    
-       $layout = $this->_helper->layout();
-       $layout->setLayout('layout_login');
+    public function registerAction() {           
+        $form = new Application_Form_User_Register();      
+        $this->_helper->setLanguages();
        
-       $form = new Application_Form_User_Register();
-       $this->view->assign('form', $form);
-       
-       $this->_helper->setLanguages();
-       
-       if ($this->getRequest()->isPost()) {
-           $formData = $this->getRequest()->getPost();
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
            
-           if (isset($formData["back"])) {
+            if (isset($formData["back"])) {
                 $this->_helper->redirector('login');
-           }
-           
-           if ($form->isValid($formData)) {
-               $newUser = new Application_Model_User();
-               $newUser->setData($formData);
-               
-               $password = new Game_Password($formData["password"]);
-               
-               $newUser->setPassword($password->getPasswordEncrypted());
-               $newUser->setPasswordSalt($password->getSalt());
-               
-               $newUser->getDataMapper()->insert();
-               
+            }
+
+            if ($form->isValid($formData)) {
+                $newUser = new Application_Model_Service_User();
+                $newUser->registerToDatabase($form);          
             } else {
                 $form->populate($formData);
             }
-       }
+        }
        
-     /* $new_user = new Application_Model_User();
-      $new_user->getDataMapper()->fetchAll();*/
-       
-     /*  $this->view->bla = $new_user->getDataMapper()->fetchAll();*/
-       
+        $layout = $this->_helper->layout();
+        $layout->setLayout('layout_login');
+        $this->view->assign('form', $form);
     }
     
     public function forgotPasswordAction() {

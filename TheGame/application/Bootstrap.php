@@ -65,11 +65,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $language = 'en';
         }
         
+        if (!file_exists($languageFile = $langPath . $language . '.ini')) {
+            $languageFile = $langPath . 'en.ini';
+        }
+        
         $locale = new Zend_Locale($language);
         
-        $locale->getLanguage();
         // Create an instance of Zend's ini adapter
-        $translate = new Zend_Translate('ini', $langPath . $locale->getLanguage() . '.ini', $locale->getLanguage());
+        $translate = new Zend_Translate('ini', $languageFile, $locale->getLanguage());
         $translate->setLocale($locale);
  
         // Set this Translation as global translation for the view helper

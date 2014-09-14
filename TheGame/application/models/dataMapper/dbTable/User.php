@@ -12,10 +12,13 @@
  * @author peter.pekarovic
  */
 class Application_Model_dataMapper_dbTable_User extends Game_DataMapper_Database {
-    private $storageClassName = 'Application_Model_dbTable_User';
+    protected $storageClass = 'Application_Model_Storage_dbTable_User';
+    protected $entityClass = 'Application_Model_Entity_User';
     
-    public function __construct($model) {
-        parent::init($model, new $this->storageClassName);
+    protected static $instance;
+    
+    protected function init() {
+        $className = $this->getStorageClass();
+        $this->setStorage(new $className());
     }
-
 }

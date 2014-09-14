@@ -5,21 +5,36 @@
  * @author peter.pekarovic
  */
 abstract class Game_DataMapper_Abstract implements Game_DataMapper_Interface {
-    protected $model = NULL;
+    protected $entityClass = NULL;
+    protected $storageClass = NULL;
     protected $storage = NULL;
     
-    abstract function insert();
-    abstract function update();
-    abstract function delete();
-    abstract function findByID($id); //prerobit
+    protected static $instance;
+    
+    abstract function insert($model);
+    abstract function update($model);
+    abstract function delete($idOrModel);
+    abstract function findById($id); //prerobit
     abstract function fetchAll(); 
     abstract function findByCondition($condition);
     
-    public function init($model, $storage) {
-        $this->setStorage($storage);
-        $this->setModel($model);
+    final protected function __construct() {
+        $this->init();
+    }
+
+    protected function init() {
+        
     }
     
+    public static function getInstance() {
+       if (!self::$instance) {
+           $className = get_called_class();
+           self::$instance = new $className();
+       } 
+       
+       return self::$instance;
+    }
+        
     public function getStorage() {
         if(!isset($this->storage)) {
             throw new Game_DataMapper_Exception('DataMapper: storage not set');
@@ -32,15 +47,31 @@ abstract class Game_DataMapper_Abstract implements Game_DataMapper_Interface {
         $this->storage = $storage;
     }
     
-    public function getModel() {
-        if(!isset($this->model)) {
-            throw new Game_DataMapper_Exception('DataMapper: model not set');
+    public function getEntityClass() {
+        if(!isset($this->entityClass)) {
+            throw new Game_DataMapper_Exception('DataMapper: entity not set');
         }
         
-        return $this->model;      
+        return $this->entityClass;      
     }
     
-    public function setModel($model) {
-        $this->model = $model;
+    public function setEntityClass($entityClass) {
+        $this->entityClass = $entityClass;
+    }
+    
+    public function getStorageClass() {
+        if(!isset($this->storageClass)) {
+            throw new Game_DataMapper_Exception('DataMapper: storage class not set');
+        }
+        
+        return $this->storageClass;      
+    }
+    
+    public function setStorageClass($storagelClass) {
+        $this->storageClass = $storagelClass;
+    }
+    
+    public function createModelInstance() {
+        
     }
 }

@@ -13,8 +13,12 @@
  */
 abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
        
-    public function insert() {
-        try {
+    public function insert($entity) {
+     /*   try {
+            if (!is_a($model, $this->getModelClass())) {
+                throw new Game_DataMapper_Exception('DataMapper: - Inserting invalid model ');
+            }
+            
             $columns = $this->getStorage()->info(Zend_Db_Table_Abstract::COLS);
             $data = $this->getModel()->getData();
             
@@ -35,14 +39,18 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
             throw new Game_DataMapper_Exception('DataMapper: - INTERNALERROR: ' . $e->getMessage());
         }
         
-        return $id_row;
+        return $id_row;*/
     }
     
     public function findByCondition($condition) {
         ;
     }
-    public function update() {
-        try {
+    public function update($entity) {
+       /* try {
+            if (!is_a($model, $this->getModelClass())) {
+                throw new Game_DataMapper_Exception('DataMapper: - Updating invalid model ');
+            }
+            
             //z configu
             $columns = $this->getStorage()->info(Zend_Db_Table_Abstract::COLS);
             $data = $this->getModel()->getData();
@@ -67,12 +75,12 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
             throw new Game_DataMapper_Exception('DataMapper: - INTERNALERROR: ' . $e->getMessage());
         }
         
-        return true;
+        return true;*/
             
     }
     
-    public function delete() {
-        try {
+    public function delete($idOrEntity) {
+       /* try {
             $id_row = (Array) $this->getModel()->getId();
             $storage = $this->getStorage();
             $rowset = call_user_func_array(Array($storage, 'find'), $id_row);
@@ -86,15 +94,15 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
             throw new Game_DataMapper_Exception('DataMapper: - INTERNALERROR: ' . $e->getMessage());
         }
         
-        return true;
+        return true;*/
     }
     
     public function fetchAll() {
-        return $this->getStorage()->fetchAll()->toArray();
+        //return $this->getStorage()->fetchAll()->toArray();
     }
     
-    public function findByID($id) {
-        $id_row = (Array) $id;
+    public function findById($id) {
+    /*    $id_row = (Array) $id;
         $storage = $this->getStorage();
         $rowset = call_user_func_array(Array($storage, 'find'), $id_row);
         $row = $rowset->current();
@@ -106,7 +114,7 @@ abstract class Game_DataMapper_Database extends Game_DataMapper_Abstract {
             return TRUE;
         } else {
             return FALSE;
-        }
+        }*/
     }
 
 }

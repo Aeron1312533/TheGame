@@ -1,0 +1,7 @@
+#language-element label input {
+    display: none;
+}
+
+#language-element label img {
+    cursor: pointer;
+}
